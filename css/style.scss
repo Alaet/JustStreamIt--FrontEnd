@@ -18,10 +18,13 @@ header
         align-items: center;
         border-right: 6px solid red;
         width: 30%;
-        h1
+        @media (min-width: 800px) {
+            h1
         {
             font-size: 4em;
         }
+            /* CSS that should be displayed if width is equal to or less than 800px goes here */
+          }
         h1, p
         {
             //border: 1px solid red;
@@ -255,11 +258,11 @@ header
         border-radius: 15px;
         position: relative;
         width: 40%;
-        height: 50%;
+        height: auto;
         z-index: 2;
         top: 10%;
         left: 30%;
-        //display: flex;
+        display: flex;
         font-family: sans-serif;
         p
         {
@@ -272,17 +275,16 @@ header
         }
         .close
         {
-            // border: 1px solid red;
-            
-            width: 40px;
+            // border: 1px solid green;
+            width: 3em;
             font-size: 2em;
             color: black;
             border-radius: 0 10px 0 0;
             height: 40px;
             //top: -3px;
-            //left: 60px;
+            //left: 50%;
             // padding: 5px 0 0 5px;
-            //text-align: right;
+            text-align: center;
             background-color: rgba(71, 61, 61, 0.95);
             z-index: 3;
 

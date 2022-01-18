@@ -28,8 +28,13 @@ header .title {
   width: 30%;
 }
 
-header .title h1 {
-  font-size: 4em;
+@media (min-width: 800px) {
+  header .title {
+    /* CSS that should be displayed if width is equal to or less than 800px goes here */
+  }
+  header .title h1 {
+    font-size: 4em;
+  }
 }
 
 header .title h1, header .title p {
@@ -278,10 +283,13 @@ header nav h2 {
   border-radius: 15px;
   position: relative;
   width: 40%;
-  height: 50%;
+  height: auto;
   z-index: 2;
   top: 10%;
   left: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   font-family: sans-serif;
 }
 
@@ -292,11 +300,12 @@ header nav h2 {
 }
 
 .modal div .close {
-  width: 40px;
+  width: 3em;
   font-size: 2em;
   color: black;
   border-radius: 0 10px 0 0;
   height: 40px;
+  text-align: center;
   background-color: rgba(71, 61, 61, 0.95);
   z-index: 3;
 }
