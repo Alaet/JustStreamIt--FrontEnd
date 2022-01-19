@@ -3,7 +3,7 @@ const BEST_ALL_CATEGORIES = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_
 const BEST_ACTION = "http://localhost:8000/api/v1/titles/?genre=Action&sort_by=-imdb_score&page_size=7&page=1";
 const BEST_ADVENTURE = "http://localhost:8000/api/v1/titles/?genre=Adventure&sort_by=-imdb_score&page_size=7&page=1";
 const BEST_HORROR = "http://localhost:8000/api/v1/titles/?genre=Horror&sort_by=-imdb_score&page_size=7&page=1";
-const BEST_THRILLER = "http://localhost:8000/api/v1/titles/?genre=Thriller&sort_by=-imdb_score&page_size=7&page=1";
+const BEST_COMEDY = "http://localhost:8000/api/v1/titles/?genre=Comedy&sort_by=-imdb_score&page_size=7&page=1";
 
 const sendRequest = async function(url) {
 // Return the data from a request to an url 
@@ -81,26 +81,27 @@ let displayTopMovieData = function(topRanked) {
   }
 
 let setPage = async function() {
-n_data = await loadData([TOP_RANKED, BEST_ALL_CATEGORIES, BEST_ACTION, BEST_ADVENTURE, BEST_HORROR, BEST_THRILLER]);
-topMovieRanked = n_data[0]
-const categoryBlocks = document.querySelectorAll(".category");
-  //Categories
-  for (let i = 0; i < categoryBlocks.length; i++) {
-      displayMoviePreview(categoryBlocks[i], n_data[(i + 1)]); // "+ 1" due to the fact that the first element of the array isn't for a category
-      displayMoviePosters(categoryBlocks[i], n_data[(i + 1)]);
-      displayMovieData(categoryBlocks[i], n_data[(i + 1)]);
-  }
-const topMovieData = document.querySelector('#top-movie__poster');
-topMovieData.style.backgroundImage = "url('" + topMovieRanked[0].image_url + "')";
-console.log(n_data[0][0].image_url)
-displayTopMovieData(topMovieRanked[0]);
+  n_data = await loadData([TOP_RANKED, BEST_ALL_CATEGORIES, BEST_ACTION, BEST_ADVENTURE, BEST_HORROR, BEST_COMEDY]);
+  topMovieRanked = n_data[0]
+  const categoryBlocks = document.querySelectorAll(".category");
+    //Categories
+    for (let i = 0; i < categoryBlocks.length; i++) {
+        displayMoviePreview(categoryBlocks[i], n_data[(i + 1)]); // "+ 1" due to the fact that the first element of the array isn't for a category
+        displayMoviePosters(categoryBlocks[i], n_data[(i + 1)]);
+        displayMovieData(categoryBlocks[i], n_data[(i + 1)]);
+    }
+  const topMovieData = document.querySelector('#top-movie__poster');
+  topMovieData.style.backgroundImage = "url('" + topMovieRanked[0].image_url + "')";
+  console.log(n_data[0][0].image_url)
+  displayTopMovieData(topMovieRanked[0]);
 }
+
+let openModal = async function(movie) {
+  document.querySelector("#" + movie + " .modal").style.visibility = "visible";
+}
+let closeModal = async function(movie) {
+document.querySelector("#" + movie + " .modal").style.visibility = "hidden";
+} 
 
 setPage()
 
-let openModal = async function(movie) {
-    document.querySelector("#" + movie + " .modal").style.visibility = "visible";
-  }
-  let closeModal = async function(movie) {
-    document.querySelector("#" + movie + " .modal").style.visibility = "hidden";
-  }
