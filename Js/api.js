@@ -43,17 +43,20 @@ let displayTopMovieData = async function(topRanked) {
     const block = document.querySelector(".top-movie__information");
     try {
       const response = await fetch(topRanked.url);
-      const jsonResponse = await response.json();
+      const movie_jsonResponse = await response.json();
 
-      console.log(jsonResponse)
       block.innerHTML = (
         "<strong style='text-shadow:black 2px 2px; color:wheat';>" + topRanked.title + "</strong>"  
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Genre(s) :</strong> " + topRanked.genres
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Année :</strong> " + topRanked.year
+        + "<br><strong class='test'>Genre(s) :</strong> " + topRanked.genres
+        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Date de sortie :</strong> " + movie_jsonResponse.date_published
         + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Note :</strong> " + topRanked.imdb_score
         + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Acteurs :</strong> " + topRanked.actors
         + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Producteur :</strong> " + topRanked.directors
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Durée :</strong> " + jsonResponse.duration + "min"
+        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Note :</strong> " + movie_jsonResponse.rated
+        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Durée :</strong> " + movie_jsonResponse.duration + "min"
+        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Pays d'origine :</strong> " + movie_jsonResponse.countries
+        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Budget :</strong> " + movie_jsonResponse.budget + " " + movie_jsonResponse.budget_currency
+        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Résumé :</strong> " + movie_jsonResponse.description     
     );
       }
     catch (e) {
@@ -81,7 +84,7 @@ let displayTopMovieData = async function(topRanked) {
     const h2s = categoryBlock.querySelectorAll(".movie h2");
     for (let i = 0; i < articles.length; i++) {
         articles[i].style.backgroundImage = "url('" + categoryData[i].image_url + "')";
-        //h2s[i].innerHTML = categoryData[i].title;
+  
     }
   }
   let displayMovieData = async function(categoryBlock, categoryData) {
@@ -103,7 +106,6 @@ let displayTopMovieData = async function(topRanked) {
             + "<br><strong>Pays d'origine :</strong> " + movie_jsonResponse.countries
             + "<br><strong>Budget :</strong> " + movie_jsonResponse.budget + " " + movie_jsonResponse.budget_currency
             + "<br><strong>Résumé :</strong> " + movie_jsonResponse.description
-            
         );
     }
   }
