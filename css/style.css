@@ -18,7 +18,7 @@ header {
   height: 150px;
   border-bottom: 3px solid red;
   border-radius: 10%;
-  text-shadow: red 2px 5px;
+  text-shadow: black 2px 4px;
 }
 
 header .title {
@@ -89,7 +89,7 @@ header nav h2 {
   vertical-align: bottom;
   margin-top: 300px;
   font-size: 2em;
-  text-shadow: red 2px 5px;
+  text-shadow: black 2px 2px;
   color: wheat;
 }
 
@@ -132,7 +132,7 @@ header nav h2 {
 
 .categories .category {
   margin-top: 10px;
-  height: 635px;
+  height: 550px;
 }
 
 .categories .category > h2 {
@@ -144,7 +144,7 @@ header nav h2 {
   color: wheat;
   font-weight: bold;
   font-style: italic;
-  text-shadow: red 2px 5px;
+  text-shadow: black 2px 2px;
 }
 
 .categories .category__best-movies {
@@ -299,7 +299,6 @@ header nav h2 {
 }
 
 .modal div {
-  overflow: auto;
   background-color: wheat;
   border: 3px solid black;
   border-radius: 15px;
