@@ -59,7 +59,6 @@ let displayTopMovieData = async function(topRanked) {
     catch (e) {
       logError(e);
       }
-    
   }
 
 
@@ -85,18 +84,26 @@ let displayTopMovieData = async function(topRanked) {
         //h2s[i].innerHTML = categoryData[i].title;
     }
   }
-  let displayMovieData = function(categoryBlock, categoryData) {
+  let displayMovieData = async function(categoryBlock, categoryData) {
     // Add the movies data to the modals
     const blocks = categoryBlock.querySelectorAll(".modal");
     for (let i = 0; i < blocks.length; i++) {
         let movie = categoryData[i];
+        const response = await fetch(movie.url);
+        const movie_jsonResponse = await response.json();
         blocks[i].querySelector("p").innerHTML = (
             "<strong>" + movie.title + "</strong>"
             + "<br><strong>Acteurs :</strong> " + movie.actors
             + "<br><strong>Producteur :</strong> " + movie.directors
             + "<br><strong>Genre(s) :</strong> " + movie.genres
-            + "<br><strong>Année :</strong> " + movie.year
-            + "<br><strong>Note :</strong> " + movie.imdb_score
+            + "<br><strong>Dare de sortie :</strong> " + movie_jsonResponse.date_published
+            + "<br><strong>Note imdb :</strong> " + movie.imdb_score
+            + "<br><strong>Note :</strong> " + movie_jsonResponse.rated
+            + "<br><strong>Durée :</strong> " + movie_jsonResponse.duration + "min"
+            + "<br><strong>Pays d'origine :</strong> " + movie_jsonResponse.countries
+            + "<br><strong>Budget :</strong> " + movie_jsonResponse.budget + " " + movie_jsonResponse.budget_currency
+            + "<br><strong>Résumé :</strong> " + movie_jsonResponse.description
+            
         );
     }
   }
