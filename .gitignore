@@ -113,6 +113,3 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /OCMovies-API-EN-FR-master/
-/node_modules/
-package-lock.json
-package.json
