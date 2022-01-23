@@ -1,10 +1,19 @@
+$column: column;
+$justify: center;
+
+@mixin flex($direction:$column, $justify-content:$justify) 
+{
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify-content;
+}
+
 html, body
 {
     background-color: rgb(43, 43, 43);
     color: wheat;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    display: flex;
-    flex-direction: column;
+    @include flex($column, null);
     max-width: 100%;
     position: fixed;
     overflow-y: auto;
@@ -30,34 +39,28 @@ header
     height: 150px;
     border-bottom: 3px solid red;
     border-radius: 10%;
-    text-shadow: black 2px 4px;
+    text-shadow: black 2px 2px;
     
     .title
     {
-        display: flex;
-        flex-direction: column;
+        @include flex($column, null);
         align-items: center;
         border-right: 6px solid red;
-        //width: 30%;
-
         h1
         {
             font-size: 4em;
         }
-        
         h1, p
         {
             //border: 1px solid red;
-            margin-top: 10px;
-            margin-bottom: 25px;
             margin: 10px 20px 20px 20px;
         }
     }
     nav
     {
+        //border: 2px solid rgb(153, 35, 35);
         display: flex;
         flex: 1;
-        //width: 70%;
         justify-content: space-around;
         h2
         {
@@ -78,8 +81,7 @@ header
     border-bottom: 2px transparent black;
     article
     {
-        // border: 3px solid red;
-        //width: 30%;
+        //border: 3px solid red;
         text-align: center;
         vertical-align: bottom;
         h1
@@ -96,17 +98,19 @@ header
         // border: 3px solid red;
         width: 100%;
         height: 100%;
-        background-size: 60%;
+        background-size: 40%;
         background-repeat: no-repeat;
         background-position-y: center;
         background-position-x: center;
-        @media (max-width: 1000px) {
+        @media (max-width: 1000px) 
+        {
             background-size: cover;
         }
         
     }
 }
-.top-movie__information{
+.top-movie__information
+{
     padding: 10px 0 0 10px;
     width: 100%;
     overflow: auto;
@@ -116,10 +120,10 @@ header
   
 .categories
 {
-    display: flex;
-    flex-direction: column;
+    @include flex($column, null);
     .category
     {
+        
         margin-top: 10px;
         height: 100%;
         // border: 2px solid green;
@@ -137,14 +141,12 @@ header
         }
         &__best-movies
         {
-            display: flex;
-            justify-content: center;
+            @include flex(null, $justify);
             width: 100%;
             
             &__movies
             {
-                display: flex;
-                justify-content: center;
+                @include flex(null, $justify);
                 margin: auto;
                 //border: 1px solid blue;
                 width: 90%;
@@ -152,12 +154,14 @@ header
             }
             .side-arrow
             {
-                display: flex;
-                justify-content: center;
+                @include flex(null, $justify);
+                
                 //border: purple solid 1px;
                 height: 360px; 
+                
                 &.left
                 {
+                    
                     position: relative;
                     left: 0px;
                 }
@@ -168,6 +172,9 @@ header
                 }
                 p
                 {
+                    color:beige;
+                    -webkit-text-stroke: 5px cornsilk;
+                    text-shadow: black 2px 40px;
                     font-weight: 900;
                     font-size: 4em;
                     // border: white solid 1px;
@@ -204,11 +211,11 @@ header
     
     width: 250px;
     height: 250px;
-    display: flex;
-    flex-direction: column;
+    @include flex($column, null);
     margin: 0 40px 0 40px;
     article
     {
+        box-shadow: black 2px 20px;
         background-repeat: no-repeat;
         height: 100%;
         width: auto;
@@ -288,7 +295,7 @@ header
         z-index: 2;
         top: 10%;
         left: 30%;
-        display: flex;
+        @include flex($column, null);
         font-family: sans-serif;
         p
         {
@@ -316,6 +323,7 @@ header
             {
                 border: 3px solid red;
                 cursor: pointer;
+                
             }
             &:active
             {
