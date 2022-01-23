@@ -1,4 +1,4 @@
-body {
+html, body {
   background-color: #2b2b2b;
   color: wheat;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -9,11 +9,21 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  max-width: 100%;
+  position: fixed;
+  overflow-y: auto;
+  max-height: 100%;
+  overflow-x: hidden;
 }
 
-.test {
+.top-movie__information-js {
   text-shadow: black 2px 5px;
   color: Cornsilk;
+}
+
+.top-movie__information-js__title {
+  text-shadow: black 2px 2px;
+  color: wheat;
 }
 
 header {
@@ -38,13 +48,10 @@ header .title {
       -ms-flex-align: center;
           align-items: center;
   border-right: 6px solid red;
-  width: 30%;
 }
 
-@media (min-width: 980px) {
-  header .title h1 {
-    font-size: 4em;
-  }
+header .title h1 {
+  font-size: 4em;
 }
 
 header .title h1, header .title p {
@@ -60,15 +67,11 @@ header nav {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  width: 70%;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
 
 header nav h2 {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   font-size: 2.5em;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -85,44 +88,38 @@ header nav h2 {
 }
 
 #top-movie article {
-  width: 30%;
   text-align: center;
   vertical-align: bottom;
 }
 
 #top-movie article h1 {
   vertical-align: bottom;
-  margin-top: 300px;
+  margin-top: 250px;
   font-size: 2em;
   text-shadow: black 2px 2px;
   color: wheat;
 }
 
 #top-movie #top-movie__poster {
-  width: 30%;
+  width: 100%;
   height: 100%;
+  background-size: 60%;
   background-repeat: no-repeat;
-  background-size: 70%;
-  background-position-y: 8px;
+  background-position-y: center;
   background-position-x: center;
 }
 
-@media (min-width: 980px) {
-  .top-movie__information {
-    padding: 10px 0 0 10px;
-    width: 30%;
-    overflow: auto;
-    font-size: 2em;
+@media (max-width: 1000px) {
+  #top-movie #top-movie__poster {
+    background-size: cover;
   }
 }
 
-@media (max-width: 980px) {
-  .top-movie__information {
-    padding: 10px 0 0 10px;
-    width: 30%;
-    overflow: auto;
-    font-size: 1.5em;
-  }
+.top-movie__information {
+  padding: 10px 0 0 10px;
+  width: 100%;
+  overflow: auto;
+  font-size: 2em;
 }
 
 .categories {
@@ -137,7 +134,7 @@ header nav h2 {
 
 .categories .category {
   margin-top: 10px;
-  height: 550px;
+  height: 100%;
 }
 
 .categories .category > h2 {
@@ -170,7 +167,7 @@ header nav h2 {
       -ms-flex-pack: center;
           justify-content: center;
   margin: auto;
-  width: 100%;
+  width: 90%;
   height: auto;
 }
 
@@ -182,7 +179,6 @@ header nav h2 {
       -ms-flex-pack: center;
           justify-content: center;
   height: 360px;
-  width: 36em;
 }
 
 .categories .category__best-movies .side-arrow.left {
@@ -223,10 +219,8 @@ header nav h2 {
 }
 
 .movie {
-  width: 18%;
-  height: 500px;
-  background-repeat: no-repeat;
-  background-size: 100%;
+  width: 250px;
+  height: 250px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -240,7 +234,8 @@ header nav h2 {
 .movie article {
   background-repeat: no-repeat;
   height: 100%;
-  background-size: 100%;
+  width: auto;
+  background-size: 250px;
 }
 
 .movie__information {
@@ -253,13 +248,14 @@ header nav h2 {
 
 .movie:hover {
   z-index: 1;
-  height: 600px;
-  width: 400px;
+  height: auto;
+  width: auto;
 }
 
 .movie:hover .movie__information {
   visibility: visible;
-  height: 30%;
+  height: auto;
+  width: auto;
   background-color: grey;
   padding: 10px 0 0 10px;
   border-bottom: 4px solid wheat;
@@ -268,14 +264,13 @@ header nav h2 {
 }
 
 .movie:hover article {
+  height: 500px;
+  background-size: cover;
+  width: auto;
   border-radius: 8px 8px 0 0;
   border-top: 4px solid wheat;
   border-left: 4px solid wheat;
   border-right: 4px solid wheat;
-}
-
-.movie:hover h2 {
-  visibility: hidden;
 }
 
 .movie--hidden {
@@ -286,7 +281,6 @@ header nav h2 {
 }
 
 .modal {
-  width: 100%;
   height: 100%;
   z-index: 2;
   position: fixed;
@@ -294,9 +288,11 @@ header nav h2 {
   left: 0;
   background-color: rgba(255, 255, 255, 0.5);
   visibility: hidden;
+  overflow: auto;
 }
 
 .modal div {
+  overflow: auto;
   background-color: wheat;
   border: 3px solid black;
   border-radius: 15px;

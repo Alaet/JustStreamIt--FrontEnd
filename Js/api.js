@@ -8,19 +8,35 @@ const BEST_COMEDY = "http://localhost:8000/api/v1/titles/?genre=Comedy&sort_by=-
 let positions = {
   all_categories: 1,
   action: 1,
-  adventure: 1,
+  adventure: 1, 
   horror: 1,
   comedy: 1
 }
 
-const nb_visible_elt = 4;
+const nb_visible_element = 4;
 
-const sendRequest = async function(url) {
-// Return the data from a request to an url 
+const getMovieData = async function(url) 
+{
 try {
     const response = await fetch(url);
-    const jsonResponse = await response.json();
-    const results = jsonResponse.results;
+    
+    const movie_data_jsonResponse = await response.json();
+    return movie_data_jsonResponse;
+}
+catch (e) {
+    logError(e);
+    }
+}
+
+
+const sendRequestCategory = async function(category_url) 
+{
+// Return the data from a request to an url 
+try {
+    const response = await fetch(category_url);
+    const category_jsonResponse = await response.json();
+    
+    const results = category_jsonResponse.results;
     return results;
     }
 catch (e) {
@@ -28,11 +44,11 @@ catch (e) {
     }
 }
 
-const loadData = async function(urllist) {
+const loadData = async function(url_list) {
     // From a list of URL, return a list of data
     let data = [];
-    for (let i = 0; i < urllist.length; i++) {
-        data.push(await sendRequest(urllist[i]));
+    for (let i = 0; i < url_list.length; i++) {
+        data.push(await sendRequestCategory(url_list[i]));
         }
 
     return data
@@ -41,28 +57,23 @@ const loadData = async function(urllist) {
 let displayTopMovieData = async function(topRanked) {
     // Put the top movie data in the 'movie' blocks
     const block = document.querySelector(".top-movie__information");
-    try {
-      const response = await fetch(topRanked.url);
-      const movie_jsonResponse = await response.json();
-
-      block.innerHTML = (
-        "<strong style='text-shadow:black 2px 2px; color:wheat';>" + topRanked.title + "</strong>"  
-        + "<br><strong class='test'>Genre(s) :</strong> " + topRanked.genres
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Date de sortie :</strong> " + movie_jsonResponse.date_published
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Note :</strong> " + topRanked.imdb_score
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Acteurs :</strong> " + topRanked.actors
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Producteur :</strong> " + topRanked.directors
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Note :</strong> " + movie_jsonResponse.rated
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Durée :</strong> " + movie_jsonResponse.duration + "min"
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Pays d'origine :</strong> " + movie_jsonResponse.countries
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Budget :</strong> " + movie_jsonResponse.budget + " " + movie_jsonResponse.budget_currency
-        + "<br><strong style='text-shadow:black 2px 5px; color:Cornsilk'>Résumé :</strong> " + movie_jsonResponse.description     
+    const movie_data = await getMovieData(topRanked.url);
+    
+    block.innerHTML = (
+      "<strong class='top-movie__information-js__title'>" + topRanked.title + "</strong>"  
+      + "<br><strong class='top-movie__information-js'>Genre(s) :</strong> " + topRanked.genres
+      + "<br><strong class='top-movie__information-js'>Date de sortie :</strong> " + movie_data.date_published
+      + "<br><strong class='top-movie__information-js'>Note :</strong> " + topRanked.imdb_score
+      + "<br><strong class='top-movie__information-js'>Acteurs :</strong> " + topRanked.actors
+      + "<br><strong class='top-movie__information-js'>Producteur :</strong> " + topRanked.directors
+      + "<br><strong class='top-movie__information-js'>Note :</strong> " + movie_data.rated
+      + "<br><strong class='top-movie__information-js'>Durée :</strong> " + movie_data.duration + "min"
+      + "<br><strong class='top-movie__information-js'>Pays d'origine :</strong> " + movie_data.countries
+      + "<br><strong class='top-movie__information-js'>Budget :</strong> " + movie_data.budget + " " + movie_data.budget_currency
+      + "<br><strong class='top-movie__information-js'>Résumé :</strong> " + movie_data.description     
     );
       }
-    catch (e) {
-      logError(e);
-      }
-  }
+ 
 
 
   let displayMoviePreview = function(categoryBlock, categoryData) {
@@ -114,7 +125,7 @@ let checkArrows = async function(category, nb_total_elt) {
   // Change the side arrows to active or to disable according to the position
   if (positions[category] == 1) {
       document.querySelector("#" + category +  " .left").classList.add("side-arrow--disable");   
-  } else if (positions[category] > (nb_total_elt - nb_visible_elt)) {
+  } else if (positions[category] > (nb_total_elt - nb_visible_element)) {
       document.querySelector("#" + category +  " .right").classList.add("side-arrow--disable");
   } else {
       document.querySelector("#" + category +  " .left").classList.remove("side-arrow--disable");
@@ -125,7 +136,7 @@ let setVisibleMovies = async function(parent, position) {
   // Display or hide the movies in the categories depending of the position of the category
   const nb_total_elt = 7;
   for(let elt_nb = 1; elt_nb <= nb_total_elt; elt_nb++) {
-      if ((elt_nb >= position) && (elt_nb < (nb_visible_elt + position))) {
+      if ((elt_nb >= position) && (elt_nb < (nb_visible_element + position))) {
           document.querySelector(parent + " .category__best-movies .movie:nth-child(" + elt_nb + ")").classList.remove("movie--hidden");
       }else {
           document.querySelector(parent + " .category__best-movies .movie:nth-child(" + elt_nb + ")").classList.add("movie--hidden");
@@ -137,7 +148,7 @@ let changeCategoryPosition = async function(category, direction) {
   // Change the position inside the category
   const nb_total_elt = document.querySelectorAll("#" + category + " .movie").length;
   if (direction == "right") {
-      if (positions[category] <= (nb_total_elt - nb_visible_elt)) {
+      if (positions[category] <= (nb_total_elt - nb_visible_element)) {
       positions[category] ++;
       setVisibleMovies("#" + category, positions[category]);
       }
