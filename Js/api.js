@@ -20,8 +20,8 @@ const getMovieData = async function(url)
 try {
     const response = await fetch(url);
     
-    const movie_data_jsonResponse = await response.json();
-    return movie_data_jsonResponse;
+    const topRankedMovie_data_jsonResponse = await response.json();
+    return topRankedMovie_data_jsonResponse;
 }
 catch (e) {
     logError(e);
@@ -57,20 +57,20 @@ const loadData = async function(url_list) {
 let displayTopMovieData = async function(topRanked) {
     // Put the top movie data in the 'movie' blocks
     const block = document.querySelector(".top-movie__information");
-    const movie_data = await getMovieData(topRanked.url);
+    const topRankedMovie_data = await getMovieData(topRanked.url);
     
     block.innerHTML = (
       "<strong class='top-movie__information-js__title'>" + topRanked.title + "</strong>"  
       + "<br><strong class='top-movie__information-js'>Genre(s) :</strong> " + topRanked.genres
-      + "<br><strong class='top-movie__information-js'>Date de sortie :</strong> " + movie_data.date_published
+      + "<br><strong class='top-movie__information-js'>Date de sortie :</strong> " + topRankedMovie_data.date_published
       + "<br><strong class='top-movie__information-js'>Note :</strong> " + topRanked.imdb_score
       + "<br><strong class='top-movie__information-js'>Acteurs :</strong> " + topRanked.actors
       + "<br><strong class='top-movie__information-js'>Producteur :</strong> " + topRanked.directors
-      + "<br><strong class='top-movie__information-js'>Note :</strong> " + movie_data.rated
-      + "<br><strong class='top-movie__information-js'>Durée :</strong> " + movie_data.duration + "min"
-      + "<br><strong class='top-movie__information-js'>Pays d'origine :</strong> " + movie_data.countries
-      + "<br><strong class='top-movie__information-js'>Budget :</strong> " + movie_data.budget + " " + movie_data.budget_currency
-      + "<br><strong class='top-movie__information-js'>Résumé :</strong> " + movie_data.description     
+      + "<br><strong class='top-movie__information-js'>Note :</strong> " + topRankedMovie_data.rated
+      + "<br><strong class='top-movie__information-js'>Durée :</strong> " + topRankedMovie_data.duration + "min"
+      + "<br><strong class='top-movie__information-js'>Pays d'origine :</strong> " + topRankedMovie_data.countries
+      + "<br><strong class='top-movie__information-js'>Budget :</strong> " + topRankedMovie_data.budget + " " + topRankedMovie_data.budget_currency
+      + "<br><strong class='top-movie__information-js'>Résumé :</strong> " + topRankedMovie_data.description     
     );
       }
  
