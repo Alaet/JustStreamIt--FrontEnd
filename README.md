@@ -6,5 +6,5 @@
  
 Exemple d'interface web par l'appel d'une API REST via JavaScript
 
-API-REST > https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR
+API-REST > https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR \
 (cf. la documentation de l'API pour des tests en local)
