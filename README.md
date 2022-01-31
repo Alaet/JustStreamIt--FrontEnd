@@ -2,7 +2,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)  
 
-# P6_oliva_maximilien
+# JustStreamIt
  
 Exemple d'interface web par l'appel d'une API REST via JavaScript
 
