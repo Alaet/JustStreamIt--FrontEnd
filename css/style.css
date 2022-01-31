@@ -90,7 +90,7 @@ header nav h2 {
   vertical-align: bottom;
 }
 
-#top-movie article h1 {
+#top-movie article h2 {
   vertical-align: bottom;
   margin-top: 250px;
   margin-left: 20%;
@@ -208,6 +208,7 @@ header nav h2 {
   font-size: 5em;
   top: 50px;
   height: 95px;
+  color: red;
 }
 
 .categories .category__best-movies .side-arrow--disable {
@@ -218,6 +219,7 @@ header nav h2 {
   font-size: 4em;
   top: 75px;
   height: 70px;
+  color: beige;
 }
 
 .movie {

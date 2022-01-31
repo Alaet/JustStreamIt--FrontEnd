@@ -84,7 +84,7 @@ header
         //border: 3px solid red;
         text-align: center;
         vertical-align: bottom;
-        h1
+        h2
         {
             vertical-align: bottom;
             margin-top: 250px;
@@ -190,6 +190,7 @@ header
                         font-size: 5em;
                         top: 50px;
                         height: 95px;
+                        color: red;
                     }
                 }
                 &--disable
@@ -202,6 +203,7 @@ header
                     font-size: 4em;
                     top: 75px;
                     height: 70px;
+                    color:beige;
                 }
             }
         }
